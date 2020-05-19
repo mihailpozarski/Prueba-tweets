@@ -1,3 +1,7 @@
+<% if user_signed_in? %>
+  <%= render partial: "form" %>
+<% end %>
+
 <% @tweets.each do |tweet| %>
 <div class="card my-3">
   <div class="card-body">
@@ -5,11 +9,10 @@
         <div class="container">
             <div class="row">
                 <div class=col-md-2>
-                    <%= tweet.user.avatar.attached? ? image_tag(url_for(tweet.user.avatar), class: "img-thumbnail img-fluid") : image_tag(tweet.user.gravatar_url, class: "img-thumbnail img-fluid") %>
-                    <%= tweet.user.email%>
+                    <%= tweet.user.avatar.attached? ? image_tag(url_for(tweet.user.avatar), class: "img-thumbnail img-fluid rounded-circle") : image_tag(tweet.user.gravatar_url, class: "img-thumbnail img-fluid rounded-circle") %>
                 </div>
                 <div class="media-body col-md-10">
-                    <h5 class="mt-0"><%= tweet.id %></h5>
+                    <h5 class="mt-0"><%= tweet.user.email%> - hace <%= link_to(time_ago_in_words(tweet.created_at), tweet_path(tweet))%></h5>
                     <p><%= tweet.text %></p>
                     <%= link_to( tweet_likes_path(tweet), class:"btn btn-info btn-small") do%>
                       <%= tweet.likes.size %> <%= fa_icon("heart") %>

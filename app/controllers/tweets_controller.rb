@@ -2,6 +2,7 @@ class TweetsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index]
 
   def index
+    @tweet = Tweet.new
     @tweets = Tweet.includes(:likes, :retweets).order(id: :desc).page params[:page]
   end
 
@@ -16,9 +17,9 @@ class TweetsController < ApplicationController
   def create
     @tweet = Tweet.new tweet_create_params
     if @tweet.save
-      redirect_to action: 'show', id: @tweet.id
+      redirect_to root_path
     else
-      render :new
+      render root_path
     end
   end
 
@@ -26,16 +27,12 @@ class TweetsController < ApplicationController
   end
 
   def create_retweet
-    retweet_tweet = Tweet.find(params.require(:id)) 
-    @tweet = Tweet.new(
-      text: retweet_tweet.text,
-      user: current_user,
-      tweet_id: retweet_tweet.id
-    )
-    if @tweet.save
-      redirect_to action: 'show', id: @tweet.id
+    @tweet = Tweet.find(params.require(:id)) 
+    @retweet = @tweet.retweets.new(user: current_user)
+    if @retweet.save
+      redirect_to root_path
     else
-      render :new
+      render root_path
     end
   end
 
