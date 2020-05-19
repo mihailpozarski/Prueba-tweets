@@ -1,0 +1,28 @@
+<%= form_with model: @tweet, class: "nifty_form" do |f| %>
+<% if @tweet.errors.any? %>
+  <div id="error_explanation">
+    <h2>
+      <%= pluralize(@tweet.errors.count, "error") %>
+      prohibited this post from being saved:
+    </h2>
+
+    <ul>
+    <% @tweet.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+<% if @tweet.errors.any? %>
+    <ul>
+        <% @tweet.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+        <% end %>
+    </ul>
+<% end %>
+<%= f.label "tweet"%>
+  <%= f.text_area :text, size: "60x5" %>
+  <%= f.text_area :user, size: "60x5" %>
+
+  <%= f.submit "Create" %>
+<% end %>
