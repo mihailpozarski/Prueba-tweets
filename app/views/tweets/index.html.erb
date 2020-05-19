@@ -9,7 +9,7 @@
         <div class="container">
             <div class="row">
                 <div class=col-md-2>
-                    <%= tweet.user.avatar.attached? ? image_tag(url_for(tweet.user.avatar), class: "img-thumbnail img-fluid rounded-circle") : image_tag(tweet.user.gravatar_url, class: "img-thumbnail img-fluid rounded-circle") %>
+                    <%= tweet.user.avatar.attached? ? image_tag(url_for(tweet.user.avatar), class: "img-thumbnail img-fluid rounded-circle thumbnail-photo") : image_tag(tweet.user.gravatar_url, class: "img-thumbnail img-fluid rounded-circle") %>
                 </div>
                 <div class="media-body col-md-10">
                     <h5 class="mt-0"><%= tweet.user.email%> - hace <%= link_to(time_ago_in_words(tweet.created_at), tweet_path(tweet))%></h5>
