@@ -2,8 +2,8 @@ class TweetsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index]
 
   def index
-    @tweet = Tweet.new
     @tweets = Tweet.includes(:likes, :retweets).order(id: :desc).page params[:page]
+    @tweet = Tweet.new
   end
 
   def show
