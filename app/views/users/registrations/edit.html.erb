@@ -5,7 +5,7 @@
 
   <div class="field">
     <%= f.label :username %><br />
-    <%= f.email_field :username, autofocus: true, autocomplete: "username" %>
+    <%= f.text_field :username, autofocus: true, autocomplete: "username" %>
   </div>
 
   <div class="field">
@@ -34,6 +34,10 @@
   <div class="field">
     <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
     <%= f.password_field :current_password, autocomplete: "current-password" %>
+  </div>
+
+  <div class=”field”> (Upload your new profile picture below!)
+    <%= f.file_field :avatar %>
   </div>
 
   <div class="actions">
