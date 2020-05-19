@@ -1089,6 +1089,7 @@ GEM
     responders (3.0.0)
       actionpack (>= 5.0)
       railties (>= 5.0)
+    rollbar (2.25.0)
     ruby_dep (1.5.0)
     rubyzip (2.3.0)
     sass (3.7.4)
@@ -1173,6 +1174,7 @@ DEPENDENCIES
   pry (~> 0.12.2)
   puma (~> 3.11)
   rails (~> 5.2.4, >= 5.2.4.2)
+  rollbar
   sass-rails (~> 5.0)
   selenium-webdriver
   spring
