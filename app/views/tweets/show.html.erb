@@ -27,6 +27,6 @@
 
 <div class="row">
   <% @tweet.likes.each do |like| %>
-    <%= like.user.avatar.attached? ? image_tag(url_for(like.user.avatar), class: "img-thumbnail img-fluid rounded-circle") : image_tag(like.user.gravatar_url, class: "img-thumbnail img-fluid rounded-circle") %>
+    <%= like.user.avatar.attached? ? image_tag(url_for(like.user.avatar), class: "img-thumbnail img-fluid rounded-circle mw-25") : image_tag(like.user.gravatar_url, class: "img-thumbnail img-fluid rounded-circle mw-25") %>
   <% end %>
 </div>
