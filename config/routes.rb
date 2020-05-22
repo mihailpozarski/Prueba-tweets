@@ -10,8 +10,10 @@ Rails.application.routes.draw do
     resources :likes
     resources :retweet
   end
+  post 'api/create_tweet', to: 'api#create_tweet'
+  post 'api/:fecha1/:fecha2', to: 'api#between_dates'
   post 'api/news'
-  post '/tweets/:id' => 'tweets#create_retweet'
+  post '/tweets/:id', to: 'tweets#create_retweet'
 
   root 'tweets#index'
 end
