@@ -1,4 +1,6 @@
 class ApiController < ActionController::API
+  acts_as_token_authentication_handler_for User
+
   def news
     @tweets = Tweet.all.order(created_at: :desc).limit(50)
     @tweets = jsoned_tweets @tweets
@@ -14,7 +16,7 @@ class ApiController < ActionController::API
   def create_tweet
     @tweet = Tweet.create(
       text: params.require(:text),
-      user: User.find(params.require(:user_id))
+      user: current_user
     )
 
     render json: @tweet

@@ -3,6 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.5.7'
 
+gem 'simple_token_authentication', '~> 1.0'
 gem 'activeadmin'
 gem 'aws-sdk'
 gem "aws-sdk-s3", require: false
