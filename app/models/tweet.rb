@@ -17,6 +17,8 @@ class Tweet < ApplicationRecord
   has_many :retweets, dependent: :destroy
   has_many :likes, dependent: :destroy
 
+  scope :tweets_for_me, ->(friends) { where(user: friends).order(id: :desc) }
+
   validates_presence_of :text, on: :create, message: "can't be blank"
 
   def liked_by?(liking_user)

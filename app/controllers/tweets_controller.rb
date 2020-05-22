@@ -2,8 +2,14 @@ class TweetsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index]
 
   def index
-    @tweets = Tweet.includes(:likes, :retweets).order(id: :desc).page params[:page]
     @tweet = Tweet.new
+    @tweets = if user_signed_in?
+                Tweet.includes(:likes, :retweets).tweets_for_me(current_user_friends).page params[:page]
+              else
+                Tweet.includes(:likes, :retweets).order(id: :desc).page params[:page]
+              end
+
+    @tweets = @tweets.where("text LIKE '%#{params[:search]}%' ") if params.has_key? :search
   end
 
   def show
@@ -40,5 +46,9 @@ class TweetsController < ApplicationController
 
   def tweet_create_params
     params.require(:tweet).permit(:text).merge(user: current_user)
+  end
+
+  def current_user_friends
+    @current_user_friends = current_user.friends.joins(:friend).map(&:friend) << current_user
   end
 end
