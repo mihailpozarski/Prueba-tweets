@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     resources :likes
     resources :retweet
   end
+  post 'api/news'
   post '/tweets/:id' => 'tweets#create_retweet'
 
   root 'tweets#index'
