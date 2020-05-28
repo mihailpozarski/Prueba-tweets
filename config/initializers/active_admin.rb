@@ -152,6 +152,8 @@ ActiveAdmin.setup do |config|
   #
   # config.before_action :do_something_awesome
 
+  config.skip_before_action :authenticate_user!
+
   # == Attribute Filters
   #
   # You can exclude possibly sensitive model attributes from being displayed,

@@ -25,15 +25,17 @@ class ApiController < ActionController::API
   private
 
   def date1
-    params[:fecha1].to_date.beginning_of_day
+    params[:fecha1]&.to_date&.beginning_of_day
   end
 
   def date2
-    params[:fecha2].to_date.end_of_day
+    params[:fecha2]&.to_date&.end_of_day
   end
 
   def jsoned_tweets(tweets)
-    return { message: "pon las fechas bien tonto" } if date1 > date2
+    unless date1.nil? && date2.nil?
+      return { message: "pon las fechas bien tonto" } if date1 > date2
+    end
 
     tweets.map do |tweet|
       {

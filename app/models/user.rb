@@ -30,8 +30,17 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_one_attached :avatar
-  has_many :tweets
-  has_many :friends
+  has_many :tweets, dependent: :destroy
+  has_many :friends, dependent: :destroy
+  has_many :likes, dependent: :destroy
+  has_many :retweets, dependent: :destroy
+
+  before_destroy :remove_friend_reference
+
+
+  def remove_friend_reference
+    Friend.where(friend_id: id).destroy_all
+  end
 
   def friends?(user)
     user.friends.find_by(friend: id)
